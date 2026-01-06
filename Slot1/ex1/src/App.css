@@ -1,40 +1,21 @@
+/* App.css */
 body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-}
-
-.app-container {
   min-height: 100vh;
-  padding-top: 64px; /* header height */
+  margin: 0;
   display: flex;
   flex-direction: column;
-  background: #f6f6f6;
 }
 
-header {
-  position: fixed;
+.navbar {
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
+  z-index: 10;
 }
 
 main {
   flex: 1;
-  padding: 24px;
 }
 
 footer {
   margin-top: auto;
-  padding: 16px 24px;
-  background: #20232a;
-  color: #ffffff;
-  text-align: center;
 }
