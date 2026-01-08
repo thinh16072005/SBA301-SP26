@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { listOfOrchids } from '../data/listOfOrchids';
 import { Row, Col, Container, Modal } from 'react-bootstrap';
 import Orchid from './Orchid';
-import OrchidModal from './OrchidModal';
+import ConfirmModal from './ConfirmModal';
 
 function OrchidList() {
     const [selectedOrchid, setSelectedOrchid] = useState(null);
@@ -28,7 +28,7 @@ function OrchidList() {
                 ))}
             </Row>
 
-            <OrchidModal showModal={showModal} selectedOrchid={selectedOrchid} handleClose={handleClose} />
+            <ConfirmModal showModal={showModal} selectedOrchid={selectedOrchid} handleClose={handleClose} />
         </Container>
     )
 }

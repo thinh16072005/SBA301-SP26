@@ -1,6 +1,6 @@
 import { Modal, Button, Badge } from 'react-bootstrap'
 
-function OrchidModal({ showModal, selectedOrchid, handleClose }) {
+function ConfirmModal({ showModal, selectedOrchid, handleClose }) {
     return (
         <>
             <Modal show={showModal} onHide={handleClose} centered>
@@ -37,4 +37,4 @@ function OrchidModal({ showModal, selectedOrchid, handleClose }) {
     )
 }
 
-export default OrchidModal
+export default ConfirmModal
