@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
+import { IoMdSearch } from "react-icons/io";
 
 function SearchBar({ onSearchChange }) {
   const [inputValue, setInputValue] = useState("");
@@ -14,7 +15,7 @@ function SearchBar({ onSearchChange }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="d-flex">
+    <Form onSubmit={handleSubmit} className="d-flex w-100" style={{ maxWidth: '300px' }}>
       <InputGroup>
         <Form.Control
           type="text"
@@ -23,7 +24,7 @@ function SearchBar({ onSearchChange }) {
           onChange={handleChange}
         />
         <Button variant="outline-light" type="submit">
-          Search
+          <IoMdSearch />
         </Button>
       </InputGroup>
     </Form>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Form, Button, Modal } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import ConfirmModal from '../components/ConfirmModal';
 
 function Contact() {
@@ -7,17 +7,18 @@ function Contact() {
         firstName: '',
         lastName: '',
         phone: '',
-        email: ''
+        email: '',
+        terms: false
     });
 
     const [errors, setErrors] = useState({});
     const [showConfirm, setShowConfirm] = useState(false);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }));
         // Clear error for this field when user starts typing
         if (errors[name]) {
@@ -27,6 +28,7 @@ function Contact() {
             }));
         }
     };
+    
     const validateForm = () => {
         const newErrors = {};
         if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
@@ -36,6 +38,7 @@ function Contact() {
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
             newErrors.email = 'Please enter a valid email';
         }
+        if (!formData.terms) newErrors.terms = 'You must agree to the terms and conditions';
         return newErrors;
     };
 
@@ -52,14 +55,14 @@ function Contact() {
     const handleConfirm = () => {
         console.log('Form submitted:', formData);
         setShowConfirm(false);
-        setFormData({ firstName: '', lastName: '', phone: '', email: '' });
+        setFormData({ firstName: '', lastName: '', phone: '', email: '', terms: false });
         setErrors({});
         alert('Thank you for contacting us!');
     };
 
     return (
         <Container className="my-5">
-            <h2 className="mb-4">Contact Us</h2>
+            <h1 className="text-center my-5">Contact Us</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label>First Name</Form.Label>
@@ -117,6 +120,18 @@ function Contact() {
                     </Form.Control.Feedback>
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check
+                        type="checkbox"
+                        label="I agree to the terms and conditions"
+                        name="terms"
+                        checked={formData.terms}
+                        onChange={handleChange}
+                        isInvalid={!!errors.terms}
+                        feedback={errors.terms}
+                        feedbackType="invalid"
+                    />
+                </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

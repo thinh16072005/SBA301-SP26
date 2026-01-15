@@ -1,5 +1,5 @@
 // TODO: Display a list of orchids with their names and images
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { listOfOrchids } from '../data/listOfOrchids';
 import { Card, Button, Badge, Row, Col, Container } from 'react-bootstrap';
 import FilterSort from './FilterSort';
@@ -22,23 +22,32 @@ function OrchidList({ searchQuery = '' }) {
     };
 
     // Lọc và sắp xếp mảng OrchidsData dựa trên trạng thái lọc và sắp xếp
-    let filteredOrchids = listOfOrchids.filter(orchid =>
-        (filterCategory === '' || orchid.category === filterCategory) &&
-        orchid.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    if (sortOption === 'asc') {
-        filteredOrchids.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortOption === 'desc') {
-        filteredOrchids.sort((a, b) => b.name.localeCompare(a.name));
-    }
+    // Sử dụng useMemo để chỉ tính toán lại khi có thay đổi
+    const filteredOrchids = useMemo(() => {
+        let filtered = listOfOrchids.filter(orchid =>
+            (filterCategory === '' || orchid.category === filterCategory) &&
+            orchid.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+        if (sortOption === 'asc') {
+            filtered.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortOption === 'desc') {
+            filtered.sort((a, b) => b.name.localeCompare(a.name));
+        }
+
+        return filtered;
+    }, [filterCategory, searchQuery, sortOption]);
 
     // Lấy danh sách các danh mục duy nhất từ mảng OrchidsData để truyền vào component FilterSort
-    let categories = [...new Set(listOfOrchids.map(orchid => orchid.category))];
+    // Sử dụng useMemo để chỉ tính toán lại khi listOfOrchids thay đổi
+    const categories = useMemo(() => {
+        return [...new Set(listOfOrchids.map(orchid => orchid.category))];
+    }, []);
 
     return (
         <div className="d-flex flex-column min-vh-100">
             <main className="flex-grow-1">
-                <Container>
+                <Container className="my-4">
                     <FilterSort
                         categories={categories}
                         onFilterChange={handleFilterChange}
