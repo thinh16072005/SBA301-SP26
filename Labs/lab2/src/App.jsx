@@ -8,6 +8,7 @@ import About from './pages/About.jsx';
 import Login from './pages/Login.jsx';
 import OrchidDetails from './pages/OrchidDetails.jsx';
 import MainLayout from './components/MainLayout.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
 
 function AppContent() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,9 +34,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -1,48 +1,8 @@
-import { useState, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import { users } from '../data/userData.js';
-import { loginReducer } from '../store/login/loginReducer.js';
+import { useLogin } from '../hooks/useLogin.jsx';
 
 function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [submitAttempted, setSubmitAttempted] = useState(false);
-    const navigate = useNavigate();
-
-    const initialState = {
-        isAuthenticated: false,
-        user: null,
-        error: ''
-    };
-
-    // Use useReducer for login state management
-    const [state, dispatch] = useReducer(loginReducer, initialState);
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-        setSubmitAttempted(true);
-
-        // Validate input fields
-        if (!username.trim() || !password.trim()) {
-            return;
-        }
-
-        // Check if user exists and password matches
-        const user = users.find(
-            (u) => u.username === username && u.password === password
-        );
-
-        if (user) {
-            // Dispatch LOGIN action with user data
-            dispatch({ type: 'LOGIN', payload: user });
-            // Login successful - redirect to home
-            navigate('/');
-        } else {
-            // Dispatch LOGIN_FAILURE action with error message
-            dispatch({ type: 'LOGIN_FAILURE', payload: 'Invalid username or password' });
-        }
-    };
+    const { loginData, submitAttempted, state, handleFormSubmit, handleInputChange } = useLogin();
 
     return (
         <Container className='flex-grow-1 py-5'>
@@ -52,20 +12,16 @@ function Login() {
 
                     {state.error && <Alert variant='danger'>{state.error}</Alert>}
 
-                    <Form onSubmit={handleLogin}>
+                    <Form onSubmit={handleFormSubmit}>
                         <Form.Group className='mb-3'>
                             <Form.Label>Username</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Enter username'
-                                value={username}
-                                onChange={(e) => {
-                                    setUsername(e.target.value);
-                                    if (state.error) {
-                                        dispatch({ type: 'LOGIN_FAILURE', payload: '' });
-                                    }
-                                }}
-                                isInvalid={submitAttempted && !username.trim()}
+                                name='username'
+                                value={loginData.username}
+                                onChange={handleInputChange}
+                                isInvalid={submitAttempted && !loginData.username.trim()}
                             />
                             <Form.Control.Feedback type='invalid'>
                                 Please enter a username.
@@ -77,14 +33,10 @@ function Login() {
                             <Form.Control
                                 type='password'
                                 placeholder='Enter password'
-                                value={password}
-                                onChange={(e) => {
-                                    setPassword(e.target.value);
-                                    if (state.error) {
-                                        dispatch({ type: 'LOGIN_FAILURE', payload: '' });
-                                    }
-                                }}
-                                isInvalid={submitAttempted && !password.trim()}
+                                name='password'
+                                value={loginData.password}
+                                onChange={handleInputChange}
+                                isInvalid={submitAttempted && !loginData.password.trim()}
                             />
                             <Form.Control.Feedback type='invalid'>
                                 Please enter a password.

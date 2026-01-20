@@ -3,10 +3,17 @@
 
 export const loginReducer = (state, action) => {
     switch (action.type) {
-        case 'LOGIN':
+        case 'LOGIN_START':
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+        case 'LOGIN_SUCCESS':
             return {
                 ...state,               // Keep existing state properties
                 isAuthenticated: true,  // Update authentication status
+                loading: false,        // Set loading to false
                 user: action.payload,   // Set user data from action payload
                 error: null             // Clear any previous errors
             };
@@ -14,10 +21,11 @@ export const loginReducer = (state, action) => {
             return {
                 ...state,
                 isAuthenticated: false,
+                loading: false,
                 user: null,
                 error: action.payload
             };
-        case 'LOGOUT': 
+        case 'LOGOUT':
             return {
                 ...state,
                 isAuthenticated: false,
@@ -26,5 +34,5 @@ export const loginReducer = (state, action) => {
             };
         default:
             return state; // Return current state for unrecognized action types
-    }   
+    }
 };
