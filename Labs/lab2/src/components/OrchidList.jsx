@@ -1,15 +1,32 @@
 // TODO: Display a list of orchids with their names and images
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { listOfOrchids } from '../data/listOfOrchids';
 import { Card, Button, Badge, Row, Col, Container } from 'react-bootstrap';
 import FilterSort from './FilterSort';
 import { Link } from 'react-router-dom';
 
-function OrchidList({ searchQuery = '' }) {
+function OrchidList({ searchQuery = '', onHomeClick }) {
     {/*Code handleFilterChange và handleSortChange để cập nhật trạng thái lọc và sắp xếp*/ }
     {/*Sử dụng useState để quản lý trạng thái lọc và sắp xếp*/ }
     const [filterCategory, setFilterCategory] = useState('');
     const [sortOption, setSortOption] = useState('');
+
+    // Create a wrapped version of onHomeClick that also resets filters
+    const wrappedOnHomeClick = () => {
+        setFilterCategory('');
+        setSortOption('');
+        if (onHomeClick) {
+            onHomeClick();
+        }
+    };
+
+    // Reset filter and sort when searchQuery changes
+    useEffect(() => {
+        if (searchQuery === '') {
+            setFilterCategory('');
+            setSortOption('');
+        }
+    }, [searchQuery]);
 
     const handleFilterChange = (category) => {
         // Cập nhật trạng thái lọc theo danh mục dùng useState 
@@ -52,6 +69,9 @@ function OrchidList({ searchQuery = '' }) {
                         categories={categories}
                         onFilterChange={handleFilterChange}
                         onSortChange={handleSortChange}
+                        onReset={wrappedOnHomeClick}
+                        filterCategory={filterCategory}
+                        sortOption={sortOption}
                     />
 
                     <Row className="gy-4" style={{ minHeight: '70vh' }}>
