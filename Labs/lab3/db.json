@@ -1,0 +1,88 @@
+{
+  "orchids": [
+    {
+      "id": 4,
+      "name": "Oncidium",
+      "description": "Dancing lady orchid with bright yellow flowers clustered on thin stems.",
+      "is_special": false,
+      "category": "Common",
+      "image": "images/orchids/oncidium.png"
+    },
+    {
+      "id": 5,
+      "name": "Paphiopedilum",
+      "description": "Lady's slipper orchid with distinctive pouch-shaped flowers and mottled foliage.",
+      "is_special": true,
+      "category": "Special",
+      "image": "images/orchids/paphiopedilum.png"
+    },
+    {
+      "id": 6,
+      "name": "Vanda",
+      "description": "Air orchid with fragrant, large blooms in blue, purple, pink, or white.",
+      "is_special": true,
+      "category": "Special",
+      "image": "images/orchids/vanda.png"
+    },
+    {
+      "id": 7,
+      "name": "Miltonia",
+      "description": "Pansy orchid with face-like flowers resembling pansies in soft, pastel colors.",
+      "is_special": false,
+      "category": "Common",
+      "image": "images/orchids/miltonia.png"
+    },
+    {
+      "id": 8,
+      "name": "Zygopetalum",
+      "description": "Fragrant orchid with blue and purple striped petals and a sweet scent.",
+      "is_special": true,
+      "category": "Special",
+      "image": "images/orchids/zygopetalum.png"
+    },
+    {
+      "name": "Miltonia",
+      "description": "Pansy orchid with face-like flowers resembling pansies in soft, pastel colors.",
+      "category": "Common",
+      "image": "images/orchids/miltonia.png",
+      "is_special": true,
+      "id": 9
+    },
+    {
+      "name": "Phạm Hưng Thịnh",
+      "description": "orchid",
+      "category": "Special",
+      "image": "images/orchids/oncidium.png",
+      "is_special": true,
+      "id": 10
+    },
+    {
+      "name": "ádasdasdasd",
+      "description": "ádsadsadasdasd",
+      "category": "ádasdasdsad",
+      "image": "ádasdasdasd",
+      "is_special": true,
+      "id": 11
+    }
+  ],
+  "banners": [
+    {
+      "id": 1,
+      "image": "/images/banners/b1.jpg",
+      "title": "Lan hồ điệp",
+      "description": "Khám phá vẻ đẹp tinh tế của lan hồ điệp với những bông hoa rực rỡ và hương thơm quyến rũ."
+    },
+    {
+      "id": 2,
+      "image": "/images/banners/b2.jpg",
+      "title": "Lan dendrobium",
+      "description": "Trải nghiệm sự đa dạng và phong phú của lan dendrobium, từ những bông hoa nhỏ xinh đến những chùm hoa lớn đầy màu sắc."
+    },
+    {
+      "id": 3,
+      "image": "/images/banners/b3.jpg",
+      "title": "Lan cattleya",
+      "description": "Thưởng thức vẻ đẹp hoang dã và quyến rũ của lan cattleya, biểu tượng của sự sang trọng và quý phái."
+    }
+  ]
+}
